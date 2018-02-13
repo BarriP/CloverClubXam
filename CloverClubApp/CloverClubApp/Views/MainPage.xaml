@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:views="clr-namespace:CloverClubApp.Views"
+            x:Class="CloverClubApp.Views.MainPage">
+    <TabbedPage.Children>
+        <NavigationPage Title="Cocteles">
+            <x:Arguments>
+                <views:CoctelsPage />
+            </x:Arguments>
+        </NavigationPage>
+
+        <NavigationPage Title="Ingredientes">
+            <x:Arguments>
+                <views:IngredientsPage />
+            </x:Arguments>
+        </NavigationPage>
+    </TabbedPage.Children>
+</TabbedPage>

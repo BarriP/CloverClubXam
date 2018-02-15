@@ -6,6 +6,7 @@
              x:Name="BrowseCoctelsPage">
     <ContentPage.Content>
         <StackLayout>
+            <Label Text="No se ha podido recuperar la lista de cocteles" IsVisible="{Binding ShowEmptyText}"/>
             <ListView x:Name="CoctelsListView" 
                       ItemsSource="{Binding Items}"
                       VerticalOptions="FillAndExpand"

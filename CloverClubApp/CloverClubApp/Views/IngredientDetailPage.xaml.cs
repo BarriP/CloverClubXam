@@ -26,7 +26,7 @@ namespace CloverClubApp.Views
 	    {
 	        InitializeComponent();
 
-	        var ing = new Ingredient();
+	        var ing = new SimpleIngredient();
 
 	        viewModel = new IngredientDetailViewModel(ing);
 	        BindingContext = viewModel;

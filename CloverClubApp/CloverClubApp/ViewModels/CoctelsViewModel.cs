@@ -13,6 +13,9 @@ namespace CloverClubApp.ViewModels
     class CoctelsViewModel : PublicBaseViewModel
     {
         public ObservableCollection<Drink> Items { get; set; }
+
+        public bool ShowEmptyText => Items?.Count == 0;
+
         public Command LoadItemsCommand { get; set; }
 
         public CoctelsViewModel()

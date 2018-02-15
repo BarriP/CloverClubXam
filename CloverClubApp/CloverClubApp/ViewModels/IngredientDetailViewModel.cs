@@ -11,12 +11,8 @@ namespace CloverClubApp.ViewModels
         public IngredientDetailViewModel(SimpleIngredient item = null)
         {
             Title = item?.Name;
-
-            if (item == null)
-            {
-                Ingredient = new Ingredient();
-                return;
-            }
         }
+
+
     }
 }

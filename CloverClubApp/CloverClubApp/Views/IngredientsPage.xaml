@@ -6,6 +6,7 @@
              x:Name="BrowseIngredientsPage">
     <ContentPage.Content>
         <StackLayout>
+            <Label Text="No se ha podido recuperar la lista de ingredientes" IsVisible="{Binding ShowEmptyText}"/>
             <ListView x:Name="IngredientsListView" 
                       ItemsSource="{Binding Items}"
                       VerticalOptions="FillAndExpand"

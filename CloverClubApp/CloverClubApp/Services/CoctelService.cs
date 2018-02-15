@@ -19,17 +19,9 @@ namespace CloverClubApp.Services
         private RESTClient client = new RESTClient();
 
 
-        public async Task<List<Drink>> RetrieveDrinks() => await client.Get<List<Drink>>(URL + COCTELES);
+        public async Task<List<Drink>> RetrieveDrinks() => await client.Get<List<Drink>>($"{URL}{COCTELES}");
 
-        public async Task<Drink> RetrieveDrink(int drinkId)
-        {
-            /*
-            var root = await client.Get<DrinkRoot>(URL + "cocteles/" + drinkId);
-            return await Task.FromResult(root.drink);
-            */
-
-            throw new NotImplementedException();
-        }
+        public async Task<Drink> RetrieveDrink(int drinkId) => await client.Get<Drink>($"{URL}{COCTELES}/{drinkId}");
 
         public async Task<List<SimpleIngredient>> RetrieveIngredients() => await client.Get<List<SimpleIngredient>>(URL + INGREDIENTES);
 

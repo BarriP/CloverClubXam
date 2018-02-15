@@ -5,6 +5,5 @@
             Title="{Binding Title}">
     <StackLayout Spacing="20" Padding="15">
         <Label Text="Text:" FontSize="Medium" />
-        <Label Text="{Binding Ing.Name}" FontSize="Small"/>
     </StackLayout>
 </ContentPage>

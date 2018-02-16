@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
+using Newtonsoft.Json;
 using Xamarin.Forms;
 
 namespace CloverClubApp.Models
@@ -9,7 +11,10 @@ namespace CloverClubApp.Models
     {
         public string IngredientName { get; set; }
         public string Photo { get; set; }
-        public string Price { get; set; }
+        [JsonProperty("price")]
+        public string PriceString { get; set; }
+        public double Price => Double.Parse(PriceString, CultureInfo.InvariantCulture);
+        public string PriceText => $"{Price} €";
 
         /* CALCULATED */
         public ImageSource Thumbnail => new UriImageSource{ Uri = new Uri(Photo)};

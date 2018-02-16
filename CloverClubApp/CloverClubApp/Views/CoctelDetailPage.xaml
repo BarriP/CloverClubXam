@@ -24,13 +24,13 @@
             </StackLayout>
 
             <ListView x:Name="IngredientsListView" 
-                      ItemsSource="{Binding Ingredients}"
-                      HeightRequest="{Binding ListLength}">
+                      ItemsSource="{Binding Coctel.Ingredients}"
+                      HeightRequest="{Binding IngredientListLength}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ImageCell 
                             ImageSource="{Binding Thumbnail}"
-                            Text="{Binding Description}">
+                            Text="{Binding DisplayText}">
                         </ImageCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -41,19 +41,30 @@
                 <Label Text="Tienda" TextColor="{StaticResource PrimaryDark}" FontSize="Large"/>
             </StackLayout>
             
-            <Picker ItemDisplayBinding="{Binding Name}" ItemsSource="{Binding Ingredients}" x:Name="Picker" SelectedIndexChanged="Picker_OnSelectedIndexChanged"/>
+            <Picker ItemDisplayBinding="{Binding IngredientName}" 
+                    ItemsSource="{Binding Coctel.Ingredients}"
+                    x:Name="Picker"
+                    Title="Selecciona aquí un ingrediente&#10; para ver productos de la tienda"
+                    SelectedIndexChanged="Picker_OnSelectedIndexChanged"/>
 
-            <ListView x:Name="ProductsListView" 
-                      ItemsSource="{Binding StoreItems}">
+            <ListView x:Name="ProductsListView"
+                      ItemsSource="{Binding StoreItems}"
+                      HeightRequest="75">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ImageCell 
                             ImageSource="{Binding Thumbnail}"
-                            Text="{Binding IngredientName}">
+                            Text="{Binding IngredientName}"
+                            Detail="{Binding PriceText}">
                         </ImageCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            
+            <StackLayout Orientation="Vertical">
+                <Label HorizontalTextAlignment="Center" Text="Precio Estimado"></Label>
+                <Label HorizontalTextAlignment="Center" FontAttributes="Bold" Text="{Binding PrecioFinal}"></Label>
+            </StackLayout>
 
         </StackLayout>
     </ScrollView>

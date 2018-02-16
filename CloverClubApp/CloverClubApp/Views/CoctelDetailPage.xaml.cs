@@ -39,19 +39,13 @@ namespace CloverClubApp.Views
 
 	        if (initialized) return;
 
-	        viewModel.LoadIngredientsCommand.Execute(null);
-	        Picker.SelectedIndex = 0;
+	        viewModel.LoadItemsCommand.Execute(null);
 	        initialized = true;
-
-	        /*
-	        if (viewModel.Items.Count == 0)
-	            viewModel.LoadItemsCommand.Execute(null);
-             */
 	    }
 
 	    private void Picker_OnSelectedIndexChanged(object sender, EventArgs e)
 	    {
-	        var a = 2;
+	        viewModel.LoadActiveCollectionCommand.Execute(Picker.Items[Picker.SelectedIndex]);
 	    }
 	}
 }

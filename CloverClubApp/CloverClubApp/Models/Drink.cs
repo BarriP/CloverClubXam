@@ -32,10 +32,14 @@ namespace CloverClubApp.Models
         public string IngredientName { get; set; }
         public string Measure { get; set; }
         public string IngredientUrl { get; set; }
+        public string ThumbnailUrl { get; set; }
+
+        public ImageSource Thumbnail => ImageSource.FromUri(new Uri(ThumbnailUrl));
+        public string DisplayText => $"{IngredientName} - {Measure}";
 
         public override string ToString()
         {
-            return $"{IngredientName} - {Measure}";
+            return DisplayText;
         }
     }
 }

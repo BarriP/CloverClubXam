@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CloverClubApp.Models;
@@ -10,61 +11,51 @@ using Xamarin.Forms;
 
 namespace CloverClubApp.ViewModels
 {
-   public class CoctelDetailViewModel : PublicBaseViewModel
-   {
-        private int _listLength;
-        public int ListLength
+    public class CoctelDetailViewModel : PublicBaseViewModel
+    {
+        /* Fix de longitud de listView */
+        private int _ingredientListLength;
+        public int IngredientListLength
         {
-            get => _listLength;
-            set => SetProperty(ref _listLength, value);
+            get => _ingredientListLength;
+            set => SetProperty(ref _ingredientListLength, value);
         }
-        public Drink Coctel { get; set; }
-        public Command LoadStoreItemsCommand { get; }
-        public Command LoadIngredientsCommand { get; }
-        public ObservableCollection<Product> StoreItems { get; set; }
-        public ObservableCollection<Ingredient> Ingredients { get; set; }
 
-        public CoctelDetailViewModel(Drink item = null)
+        private string _precioFinal;
+        public string PrecioFinal
+        {
+            get => _precioFinal;
+            set => SetProperty(ref _precioFinal, value);
+        }
+
+        public Command LoadItemsCommand { get; }
+        public Command<string> LoadActiveCollectionCommand { get; } 
+
+        public Drink Coctel { get; set; }
+
+        private ObservableCollection<Product> _actualStoreItems;
+        public ObservableCollection<Product> StoreItems
+        {
+            get => _actualStoreItems;
+            set => SetProperty(ref _actualStoreItems, value);
+        }
+        private IDictionary<string, ObservableCollection<Product>> produtcs;
+
+
+        public CoctelDetailViewModel(Drink item)
         {
             Title = item?.Name;
             Coctel = item;
+            IngredientListLength = Coctel.Ingredients.Count() * 50 + Coctel.Ingredients.Count() * 15;
+
+            LoadItemsCommand = new Command(async () => await ExecuteLoadStoreItemsCommand());
+            LoadActiveCollectionCommand = new Command<string>(ing => StoreItems = produtcs[ing]);
+
             StoreItems = new ObservableCollection<Product>();
-            Ingredients = new ObservableCollection<Ingredient>();
-            LoadStoreItemsCommand = new Command(async () => await ExecuteLoadStoreItemsCommand());
-            LoadIngredientsCommand = new Command(async () => await ExecuteLoadIngredientsCommand());
-        }
-
-        //TODO ASYNC
-        // AQUI NOS TOCAN 2 ASYNC
-        // * CARGAR TIENDA
-        // * CARGAR INGREDIENTES
-
-        async Task ExecuteLoadIngredientsCommand()
-        {
-            if (IsBusy)
-                return;
-
-            IsBusy = true;
-
-            try
+            produtcs = new Dictionary<string, ObservableCollection<Product>>();
+            foreach (var ing in Coctel.Ingredients)
             {
-                Ingredients.Clear();
-                foreach (var drinkIngredient in Coctel.Ingredients)
-                {
-                    var ing = await CoctelService.RetrieveIngredient(drinkIngredient.IngredientName);
-                    ing.Description = drinkIngredient.ToString();
-                    Ingredients.Add(ing);
-                }
-
-                ListLength = Ingredients.Count * 50 + Ingredients.Count * 15;
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
-            finally
-            {
-                IsBusy = false;
+                produtcs.Add(ing.IngredientName, new ObservableCollection<Product>());
             }
         }
 
@@ -72,19 +63,19 @@ namespace CloverClubApp.ViewModels
         {
             if (IsBusy)
                 return;
-
             IsBusy = true;
 
             try
             {
-                /*
-                StoreItems.Clear();
-                var items = await CoctelService.RetrieveIngredients();
-                foreach (var item in items)
+                double price = 0.0;
+                foreach (var ing in Coctel.Ingredients)
                 {
-                    StoreItems.Add(item);
+                    var collection = produtcs[ing.IngredientName];
+                    var product = await CoctelService.RetrieveProduct(ing.IngredientName);
+                    collection.Add(product);
+                    price += product.Price;
                 }
-                */
+                PrecioFinal = $"{price} €/coctel";
             }
             catch (Exception ex)
             {

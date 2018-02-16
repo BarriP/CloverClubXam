@@ -2,8 +2,51 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CloverClubApp.Views.IngredientDetailPage"
-            Title="{Binding Title}">
-    <StackLayout Spacing="20" Padding="15">
-        <Label Text="Text:" FontSize="Medium" />
-    </StackLayout>
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+             xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
+             Title="{Binding Title}">
+    <ScrollView>
+
+        <StackLayout Spacing="20" Padding="15">
+            <Label Text="{Binding Ingredient.Type}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Medium" FontAttributes="Italic"/>
+            <!--
+            <controls:CircleImage Source="{Binding Ingredient.Image}" Aspect="AspectFit" WidthRequest="240" HeightRequest="240"/>
+            
+            
+
+            
+            <StackLayout Orientation="Horizontal" Spacing="10">
+                <iconize:IconLabel FontSize="Large" Text="fa-info-circle" TextColor="{StaticResource PrimaryDark}"/>
+                <Label Text="Instrucciones" TextColor="{StaticResource PrimaryDark}" FontSize="Large"/>
+            </StackLayout>
+
+            <Label FontSize="Medium" Text="{Binding Ingredient.Description}"/>
+
+            <StackLayout Margin="0,20,0,0" Orientation="Horizontal" Spacing="10">
+                <iconize:IconLabel FontSize="Large" Text="fa-shopping-bag" TextColor="{StaticResource PrimaryDark}"/>
+                <Label Text="Tienda" TextColor="{StaticResource PrimaryDark}" FontSize="Large"/>
+            </StackLayout>
+
+            <ListView x:Name="ProductsListView"
+                      ItemsSource="{Binding Products}"
+                      HeightRequest="75">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ImageCell 
+                            ImageSource="{Binding Thumbnail}"
+                            Text="{Binding IngredientName}"
+                            Detail="{Binding PriceText}">
+                        </ImageCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <StackLayout Margin="0,20,0,0" Orientation="Horizontal" Spacing="10">
+                <iconize:IconLabel FontSize="Large" Text="fa-drink" TextColor="{StaticResource PrimaryDark}"/>
+                <Label Text="Cocteles Relacionados" TextColor="{StaticResource PrimaryDark}" FontSize="Large"/>
+            </StackLayout>
+
+            -->
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

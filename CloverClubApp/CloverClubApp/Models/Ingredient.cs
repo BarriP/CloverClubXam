@@ -12,7 +12,14 @@ namespace CloverClubApp.Models
         public string ThumbnailUrl { get; set; }
         [JsonProperty("image")]
         public string ImageUrl { get; set; }
-        public string Description { get; set; }
+
+        private string _description;
+        public string Description
+        {
+            get => String.IsNullOrEmpty(_description) ? "The perfect ingredient for a drink" : _description;
+            set => _description = value;
+        }
+
         public string Type { get; set; }
 
         /* calculated */

@@ -14,6 +14,7 @@ namespace CloverClubApp.Views
 	public partial class IngredientDetailPage : ContentPage
 	{
 	    private IngredientDetailViewModel viewModel;
+	    private bool initialized;
 
 	    public IngredientDetailPage(IngredientDetailViewModel viewModel)
 	    {
@@ -30,6 +31,16 @@ namespace CloverClubApp.Views
 
 	        viewModel = new IngredientDetailViewModel(ing);
 	        BindingContext = viewModel;
+	    }
+
+	    protected override void OnAppearing()
+	    {
+	        base.OnAppearing();
+
+	        if (initialized) return;
+
+	        viewModel.LoadIngredientCommand.Execute(null);
+	        initialized = true;
 	    }
     }
 }

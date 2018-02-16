@@ -8,12 +8,11 @@ namespace CloverClubApp.Services
 {
     public interface ICoctelService
     {
-        Task<List<Drink>> RetrieveDrinks();
+        Task<IEnumerable<Drink>> RetrieveDrinks();
         Task<Drink> RetrieveDrink(int drinkId);
-        Task<List<SimpleIngredient>> RetrieveIngredients();
+        Task<IEnumerable<SimpleIngredient>> RetrieveIngredients();
         Task<Ingredient> RetrieveIngredient(string ingredientName);
-        Task<List<Drink>> RetrieveRelated(string ingredientName);
-
-        // TODO Precios
+        Task<IEnumerable<Drink>> RetrieveRelated(string ingredientName);
+        Task<Product> RetrieveProduct(string ingredientName);
     }
 }

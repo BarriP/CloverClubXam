@@ -11,8 +11,15 @@ namespace CloverClubApp.ViewModels
 {
     class IngredientsViewModel : PublicBaseViewModel
     {
+        private bool _showEmptyText;
+        public bool ShowEmptyText
+        {
+            get => _showEmptyText;
+            set => SetProperty(ref _showEmptyText, value);
+        }
+
         public ObservableCollection<SimpleIngredient> Items { get; set; }
-        public bool ShowEmptyText => Items?.Count == 0;
+
         public Command LoadItemsCommand { get; set; }
 
         public IngredientsViewModel()
@@ -53,6 +60,7 @@ namespace CloverClubApp.ViewModels
             }
             finally
             {
+                ShowEmptyText = Items.Count == 0;
                 IsBusy = false;
             }
         }

@@ -17,6 +17,7 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Models\Drink.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Ingredient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Product.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SimpleIngredient.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\CoctelService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ICoctelService.cs" />

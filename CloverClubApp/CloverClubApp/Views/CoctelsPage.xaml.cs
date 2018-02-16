@@ -34,7 +34,6 @@ namespace CloverClubApp.Views
 	        CoctelsListView.SelectedItem = null;
 	    }
 
-
         /*
 	    async void AddItem_Clicked(object sender, EventArgs e)
 	    {

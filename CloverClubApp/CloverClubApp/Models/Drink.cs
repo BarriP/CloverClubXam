@@ -18,11 +18,13 @@ namespace CloverClubApp.Models
 
         [JsonProperty("thumbnailURL")]
         public string ThumbnailURL { get; set; }
-        public List<Ingredient> Ingredients { get; set; }
+        public IEnumerable<DrinkIngredient> Ingredients { get; set; }
         public string Iba { get; set; }
 
         /* Calculated */
         public ImageSource Thumbnail => ImageSource.FromUri(new Uri("http://" + ThumbnailURL));
+        public string DisplayCategory => $"{Category} - {Alcoholic}";
+        public string DisplayServe => $"To be served with: {Glass ?? "A fancy glass"}";
     }
 
     public class DrinkIngredient
@@ -30,5 +32,10 @@ namespace CloverClubApp.Models
         public string IngredientName { get; set; }
         public string Measure { get; set; }
         public string IngredientUrl { get; set; }
+
+        public override string ToString()
+        {
+            return $"{IngredientName} - {Measure}";
+        }
     }
 }

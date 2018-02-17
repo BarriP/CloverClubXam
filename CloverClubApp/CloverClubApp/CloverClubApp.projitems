@@ -17,19 +17,24 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Models\Drink.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Ingredient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\LoginData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Product.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\RegisterData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SimpleIngredient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\User.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\CoctelService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ICoctelService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IRESTClient.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IUserService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\RESTClient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\UserService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AboutViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\CoctelDetailViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\CoctelsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\IngredientDetailViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\IngredientsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\PublicBaseViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\UserViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\CoctelDetailPage.xaml.cs">
       <DependentUpon>CoctelDetailPage.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -46,6 +51,10 @@
       <DependentUpon>IngredientsPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -55,6 +64,14 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\NewItemPage.xaml.cs">
       <DependentUpon>NewItemPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\RegisterPage.xaml.cs">
+      <DependentUpon>RegisterPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\UserPage.xaml.cs">
+      <DependentUpon>UserPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -94,7 +111,22 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Views\CustomViews\" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\UserPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\RegisterPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\LoginPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <!--#if (CreateBackendProject)
     <Compile Include="$(MSBuildThisFileDirectory)Services\AzureDataStore.cs" />

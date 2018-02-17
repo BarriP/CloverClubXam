@@ -14,7 +14,7 @@
 
             <StackLayout Orientation="Horizontal" Spacing="10">
                 <iconize:IconLabel FontSize="Large" Text="fa-info-circle" TextColor="{StaticResource PrimaryDark}"/>
-                <Label Text="Instrucciones" TextColor="{StaticResource PrimaryDark}" FontSize="Large"/>
+                <Label Text="Información" TextColor="{StaticResource PrimaryDark}" FontSize="Large"/>
             </StackLayout>
 
             <Label FontSize="Medium" Text="{Binding Ingredient.Description}"/>

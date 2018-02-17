@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CloverClubApp.Views.UserPage"
+             Title="{Binding Title}">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                <Label Text="Bienvenido al area personal"
+                        HorizontalOptions="Center"
+                        FontSize="Large"/>
+                <Label Text="Entra con tu usuario o registrate"
+                       HorizontalOptions="Center"
+                       FontSize="Medium"/>
+            </StackLayout>
+            <StackLayout VerticalOptions="CenterAndExpand" Padding="10">
+                <Button Text="Login" BackgroundColor="{StaticResource Primary}" TextColor="White" Clicked="ButtonLogin_OnClicked"/>
+                <Button Text="Registrarse" BackgroundColor="{StaticResource Primary}" TextColor="White" Clicked="ButtonRegister_OnClicked"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

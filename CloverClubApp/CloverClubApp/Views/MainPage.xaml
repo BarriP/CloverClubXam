@@ -15,5 +15,11 @@
                 <views:IngredientsPage />
             </x:Arguments>
         </NavigationPage>
+
+        <NavigationPage Title="Area Personal">
+            <x:Arguments>
+                <views:UserPage />
+            </x:Arguments>
+        </NavigationPage>
     </TabbedPage.Children>
 </TabbedPage>

@@ -22,7 +22,7 @@ namespace CloverClubApp.Models
         public string Iba { get; set; }
 
         /* Calculated */
-        public ImageSource Thumbnail => ImageSource.FromUri(new Uri("http://" + ThumbnailURL));
+        public ImageSource Thumbnail => String.IsNullOrEmpty(ThumbnailURL) ? null : ImageSource.FromUri(new Uri("http://" + ThumbnailURL));
         public string DisplayCategory => $"{Category} - {Alcoholic}";
         public string DisplayServe => $"To be served with: {Glass ?? "A fancy glass"}";
     }
@@ -34,7 +34,7 @@ namespace CloverClubApp.Models
         public string IngredientUrl { get; set; }
         public string ThumbnailUrl { get; set; }
 
-        public ImageSource Thumbnail => ImageSource.FromUri(new Uri(ThumbnailUrl));
+        public ImageSource Thumbnail => String.IsNullOrEmpty(ThumbnailUrl) ? null : ImageSource.FromUri(new Uri(ThumbnailUrl));
         public string DisplayText => $"{IngredientName} - {Measure}";
 
         public override string ToString()

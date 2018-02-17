@@ -21,6 +21,14 @@ namespace CloverClubApp.ViewModels
             set => SetProperty(ref _ingredientListLength, value);
         }
 
+        /* Fix de longitud de listView */
+        private int _productListLength;
+        public int ProductListLength
+        {
+            get => _productListLength;
+            set => SetProperty(ref _productListLength, value);
+        }
+
         private string _precioFinal;
         public string PrecioFinal
         {
@@ -49,7 +57,7 @@ namespace CloverClubApp.ViewModels
             IngredientListLength = Coctel.Ingredients.Count() * 50 + Coctel.Ingredients.Count() * 15;
 
             LoadItemsCommand = new Command(async () => await ExecuteLoadStoreItemsCommand());
-            LoadActiveCollectionCommand = new Command<string>(ing => StoreItems = produtcs[ing]);
+            LoadActiveCollectionCommand = new Command<string>(ing => { StoreItems = produtcs[ing]; ProductListLength = StoreItems.Count * 50 + StoreItems.Count * 15; });
 
             StoreItems = new ObservableCollection<Product>();
             produtcs = new Dictionary<string, ObservableCollection<Product>>();
@@ -71,9 +79,13 @@ namespace CloverClubApp.ViewModels
                 foreach (var ing in Coctel.Ingredients)
                 {
                     var collection = produtcs[ing.IngredientName];
-                    var product = await CoctelService.RetrieveProduct(ing.IngredientName);
-                    collection.Add(product);
-                    price += product.Price;
+                    var restProducts = await CoctelService.RetrieveProducts(ing.IngredientName);
+                    foreach (var product in restProducts)
+                    {
+                        collection.Add(product);
+                    }
+
+                    price += restProducts.Min(x => x.Price);
                 }
                 PrecioFinal = $"{price} €/coctel";
             }

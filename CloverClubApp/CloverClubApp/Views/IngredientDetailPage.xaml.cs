@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CarouselView.FormsPlugin.Abstractions;
 using CloverClubApp.Models;
 using CloverClubApp.ViewModels;
 using Xamarin.Forms;
@@ -21,7 +23,7 @@ namespace CloverClubApp.Views
 	        InitializeComponent();
 
 	        BindingContext = this.viewModel = viewModel;
-	    }
+        }
 
 	    public IngredientDetailPage()
 	    {

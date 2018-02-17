@@ -17,6 +17,6 @@ namespace CloverClubApp.Models
         public string PriceText => $"{Price} €";
 
         /* CALCULATED */
-        public ImageSource Thumbnail => new UriImageSource{ Uri = new Uri(Photo)};
+        public ImageSource Thumbnail => String.IsNullOrEmpty(Photo) ? null : ImageSource.FromUri(new Uri(Photo));
     }
 }

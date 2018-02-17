@@ -13,6 +13,6 @@ namespace CloverClubApp.Services
         Task<IEnumerable<SimpleIngredient>> RetrieveIngredients();
         Task<Ingredient> RetrieveIngredient(string ingredientName);
         Task<IEnumerable<Drink>> RetrieveRelated(string ingredientName);
-        Task<Product> RetrieveProduct(string ingredientName);
+        Task<IEnumerable<Product>> RetrieveProducts(string ingredientName);
     }
 }

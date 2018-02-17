@@ -49,7 +49,7 @@
 
             <ListView x:Name="ProductsListView"
                       ItemsSource="{Binding StoreItems}"
-                      HeightRequest="75">
+                      HeightRequest="{Binding ProductListLength}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ImageCell 

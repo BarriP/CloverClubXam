@@ -29,6 +29,6 @@ namespace CloverClubApp.Services
 
         public async Task<IEnumerable<Drink>> RetrieveRelated(string ingredientName) => await client.Get<IEnumerable<Drink>>($"{URL}{INGREDIENTES}/{ingredientName}/{COCTELES}");
 
-        public async Task<Product> RetrieveProduct(string ingredientName) => await client.Get<Product>($"{URL}{INGREDIENTES}/{ingredientName}/precio");
+        public async Task<IEnumerable<Product>> RetrieveProducts(string ingredientName) => await client.Get<IEnumerable<Product>>($"{URL}{INGREDIENTES}/{ingredientName}/precio");
     }
 }

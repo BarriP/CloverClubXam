@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using CarouselView.FormsPlugin.Android;
 using ImageCircle.Forms.Plugin.Droid;
 
 namespace CloverClubApp.Droid
@@ -25,6 +26,7 @@ namespace CloverClubApp.Droid
             //Plugins
             ImageCircleRenderer.Init();
             Plugin.Iconize.Iconize.With(new Plugin.Iconize.Fonts.FontAwesomeModule());
+            CarouselViewRenderer.Init();
 
             FormsPlugin.Iconize.Droid.IconControls.Init(Resource.Id.toolbar, Resource.Id.tabMode);
 

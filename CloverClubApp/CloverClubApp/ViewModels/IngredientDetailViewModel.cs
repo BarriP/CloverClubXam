@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CloverClubApp.Models;
@@ -11,6 +12,14 @@ namespace CloverClubApp.ViewModels
 {
     public class IngredientDetailViewModel : PublicBaseViewModel
     {
+        /* Fix de longitud de listView */
+        private int _productListLength;
+        public int ProductListLength
+        {
+            get => _productListLength;
+            set => SetProperty(ref _productListLength, value);
+        }
+
         private Ingredient _ingredient;
         public Ingredient Ingredient
         {
@@ -19,6 +28,7 @@ namespace CloverClubApp.ViewModels
         }
         public SimpleIngredient SimpleIngredient { get; }
         public ObservableCollection<Product> Products { get; }
+        public ObservableCollection<Drink> Related { get; } 
 
         public Command LoadIngredientCommand { get; }
 
@@ -28,6 +38,7 @@ namespace CloverClubApp.ViewModels
             SimpleIngredient = item;
             Ingredient = new Ingredient();
             Products = new ObservableCollection<Product>();
+            Related = new ObservableCollection<Drink>();
             LoadIngredientCommand = new Command(async () => await ExecuteLoadStoreItemsCommand());
         }
 
@@ -40,8 +51,19 @@ namespace CloverClubApp.ViewModels
             try
             {
                 Ingredient = await CoctelService.RetrieveIngredient(SimpleIngredient.Name);
-                Products.Add(await CoctelService.RetrieveProduct(SimpleIngredient.Name));
 
+                var restProducts = await CoctelService.RetrieveProducts(SimpleIngredient.Name);
+                foreach (var product in restProducts)
+                {
+                    Products.Add(product);
+                }
+                ProductListLength = Products.Count * 50 + Products.Count * 15;
+
+                var relatedRest = await CoctelService.RetrieveRelated(SimpleIngredient.Name);
+                foreach (var r in relatedRest)
+                {
+                    Related.Add(r);
+                }
             }
             catch (Exception ex)
             {

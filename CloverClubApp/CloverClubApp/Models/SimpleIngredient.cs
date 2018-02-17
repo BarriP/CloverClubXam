@@ -16,8 +16,8 @@ namespace CloverClubApp.Models
         public string ImageUrl { get; set; }
 
         /* calculated */
-        public ImageSource Thumbnail => ImageSource.FromUri(new Uri(ThumbnailUrl));
-        public ImageSource Iamge => ImageSource.FromUri(new Uri(ImageUrl));
+        public ImageSource Thumbnail => String.IsNullOrEmpty(ThumbnailUrl) ? null : ImageSource.FromUri(new Uri(ThumbnailUrl));
+        public ImageSource Iamge => String.IsNullOrEmpty(ImageUrl) ? null : ImageSource.FromUri(new Uri(ImageUrl));
 
     }
 }

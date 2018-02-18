@@ -38,14 +38,18 @@ namespace CloverClubApp.ViewModels
 
         public string User { get; set; }
 
-
-
         public UserViewModel()
         {
             Title = "Area Personal";
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             Drinks = new ObservableCollection<Drink>();
             Ingredients = new ObservableCollection<SimpleIngredient>();
+
+            MessagingCenter.Subscribe<CoctelDetailPage, int>(this, "AddCoctelFav", (obj, item) =>
+            {
+                App.Current.Properties.TryGetValue("token", out object tokenObject);
+                userService.AñadirCoctelFav(item, tokenObject.ToString());
+            });
         }
 
         private async Task ExecuteLoadItemsCommand()

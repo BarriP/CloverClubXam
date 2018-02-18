@@ -49,15 +49,14 @@ namespace CloverClubApp.Services
 
         public async Task<T> PostSecureJson<T>(string uri, string token, object body)
         {
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            client.DefaultRequestHeaders
-                .Accept
-                .Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            HttpClient newClient = new HttpClient();
+
+            newClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
             var stringPayload = JsonConvert.SerializeObject(body);
             var httpContent = new StringContent(stringPayload, Encoding.UTF8, "application/json");
 
-            var response = await client.PostAsync(uri, httpContent);
+            var response = newClient.PostAsync(new Uri(uri), httpContent).Result;
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
@@ -76,6 +75,23 @@ namespace CloverClubApp.Services
             HttpClient newClient = new HttpClient();
 
             var response = newClient.PostAsync(new Uri(uri), httpContent).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                var items = JsonConvert.DeserializeObject<T>(content);
+                return items;
+            }
+
+            return default(T);
+        }
+
+        public async Task<T> DeleteSecure<T>(string uri, string token)
+        {
+            HttpClient newClient = new HttpClient();
+
+            newClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            var response = newClient.DeleteAsync(uri).Result;
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();

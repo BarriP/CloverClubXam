@@ -11,5 +11,6 @@ namespace CloverClubApp.Services
         Task<T> GetSecure<T>(string uri, string token);
         Task<T> PostSecureJson<T>(string uri, string token, object body);
         Task<T> PostJson<T>(string uri, object body);
+        Task<T> DeleteSecure<T>(string uri, string token);
     }
 }

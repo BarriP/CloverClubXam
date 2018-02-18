@@ -31,6 +31,30 @@ namespace CloverClubApp.Services
         {
             return await client.GetSecure<User>(USER_URL, token);
         }
+
+        public bool AñadirCoctelFav(int id, string token)
+        {
+            var response = client.PostSecureJson<dynamic>($"{USER_URL}/{COCTELES}", token, id).Result;
+            return response == null;
+        }
+
+        public bool AñadirIngredienteFav(string ing, string token)
+        {
+            var response = client.PostSecureJson<dynamic>($"{USER_URL}/{INGREDIENTES}", token, ing).Result;
+            return response == null;
+        }
+
+        public bool BorrarCoctelFav(int id, string token)
+        {
+            var response = client.DeleteSecure<dynamic>($"{USER_URL}/{COCTELES}/{id}", token).Result;
+            return response == null;
+        }
+
+        public bool BorrarIngredienteFav(string ing, string token)
+        {
+            var response = client.DeleteSecure<dynamic>($"{USER_URL}/{INGREDIENTES}/{ing}", token).Result;
+            return response == null;
+        }
     }
 
     public class Token

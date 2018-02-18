@@ -5,6 +5,9 @@
              xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
              xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
              Title="{Binding Title}">
+    <ContentPage.ToolbarItems>
+        <iconize:IconToolbarItem Text="fa-star" Clicked="AddFav_OnClicked"></iconize:IconToolbarItem>
+    </ContentPage.ToolbarItems>
     <ScrollView>
         <StackLayout Spacing="20" Padding="15">
             <controls:CircleImage Source="{Binding Coctel.Thumbnail}" Aspect="AspectFit" WidthRequest="240" HeightRequest="240"/>

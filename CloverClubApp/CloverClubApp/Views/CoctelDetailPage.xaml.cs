@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Android.Content;
 using CloverClubApp.Models;
+using CloverClubApp.Services;
 using CloverClubApp.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -47,5 +49,11 @@ namespace CloverClubApp.Views
 	    {
 	        viewModel.LoadActiveCollectionCommand.Execute(Picker.Items[Picker.SelectedIndex]);
 	    }
+
+	    private void AddFav_OnClicked(object sender, EventArgs e)
+	    {
+	        App.Current.Properties.TryGetValue("loggedIn", out object logged);
+	        MessagingCenter.Send(this, "AddCoctelFav", Int32.Parse(viewModel.Coctel.Id));
+        }
 	}
 }

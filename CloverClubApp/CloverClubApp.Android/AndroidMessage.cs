@@ -1,6 +1,7 @@
 ﻿using Android.App;
 using Android.Widget;
-using CloverClubApp.DeviceSpecific;using CloverClubApp.Droid;
+using CloverClubApp.DeviceSpecific;
+using CloverClubApp.Droid;
 
 [assembly: Xamarin.Forms.Dependency(typeof(AndroidMessage))]
 namespace CloverClubApp.Droid

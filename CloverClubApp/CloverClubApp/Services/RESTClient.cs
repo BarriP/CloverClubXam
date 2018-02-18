@@ -49,14 +49,12 @@ namespace CloverClubApp.Services
 
         public async Task<T> PostSecureJson<T>(string uri, string token, object body)
         {
-            HttpClient newClient = new HttpClient();
-
-            newClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
             var stringPayload = JsonConvert.SerializeObject(body);
             var httpContent = new StringContent(stringPayload, Encoding.UTF8, "application/json");
 
-            var response = newClient.PostAsync(new Uri(uri), httpContent).Result;
+            var response = client.PostAsync(new Uri(uri), httpContent).Result;
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
@@ -72,9 +70,7 @@ namespace CloverClubApp.Services
             var stringPayload = JsonConvert.SerializeObject(body);
             var httpContent = new StringContent(stringPayload, Encoding.UTF8, "application/json");
 
-            HttpClient newClient = new HttpClient();
-
-            var response = newClient.PostAsync(new Uri(uri), httpContent).Result;
+            var response = client.PostAsync(new Uri(uri), httpContent).Result;
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
@@ -87,11 +83,9 @@ namespace CloverClubApp.Services
 
         public async Task<T> DeleteSecure<T>(string uri, string token)
         {
-            HttpClient newClient = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-            newClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-
-            var response = newClient.DeleteAsync(uri).Result;
+            var response = client.DeleteAsync(uri).Result;
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();

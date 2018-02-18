@@ -4,9 +4,8 @@ using System.Text;
 
 namespace CloverClubApp.DeviceSpecific
 {
-    public interface IMessage
+    public interface IValidation
     {
-        void LongAlert(string message);
-        void ShortAlert(string message);
+        bool ValidateEmail(string email);
     }
 }

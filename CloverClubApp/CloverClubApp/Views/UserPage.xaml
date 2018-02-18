@@ -5,7 +5,7 @@
              x:Class="CloverClubApp.Views.UserPage"
              Title="{Binding Title}">
     <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="Logout" Text="Desconectar" Clicked="Logout_OnClicked" IsEnabled="False"/>
+        <iconize:IconToolbarItem x:Name="Logout" Text="Desconectar" Clicked="Logout_OnClicked" IsVisible="False"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">

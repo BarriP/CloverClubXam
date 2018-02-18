@@ -1,22 +1,59 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
              x:Class="CloverClubApp.Views.UserPage"
              Title="{Binding Title}">
     <ContentPage.Content>
-        <StackLayout>
-            <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                <Label Text="Bienvenido al area personal"
-                        HorizontalOptions="Center"
-                        FontSize="Large"/>
-                <Label Text="Entra con tu usuario o registrate"
-                       HorizontalOptions="Center"
-                       FontSize="Medium"/>
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <StackLayout x:Name="LoginLayout">
+                <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                    <Label Text="Bienvenido al area personal"
+                            HorizontalOptions="Center"
+                            FontSize="Large"/>
+                    <Label Text="Entra con tu usuario o registrate"
+                           HorizontalOptions="Center"
+                           FontSize="Medium"/>
+                </StackLayout>
+                <Label Text="{Binding User}"></Label>
+                <StackLayout VerticalOptions="CenterAndExpand" Padding="10">
+                    <Button Text="Login" BackgroundColor="{StaticResource Primary}" TextColor="White" Clicked="ButtonLogin_OnClicked"/>
+                    <Button Text="Registrarse" BackgroundColor="{StaticResource Primary}" TextColor="White" Clicked="ButtonRegister_OnClicked"/>
+                </StackLayout>
             </StackLayout>
-            <Label Text="{Binding User}"></Label>
-            <StackLayout VerticalOptions="CenterAndExpand" Padding="10">
-                <Button Text="Login" BackgroundColor="{StaticResource Primary}" TextColor="White" Clicked="ButtonLogin_OnClicked"/>
-                <Button Text="Registrarse" BackgroundColor="{StaticResource Primary}" TextColor="White" Clicked="ButtonRegister_OnClicked"/>
+            <StackLayout x:Name="UserLayout" IsVisible="False">
+
+                <StackLayout Orientation="Horizontal" Spacing="10">
+                    <iconize:IconLabel FontSize="Large" Text="fa-star" TextColor="{StaticResource PrimaryDark}"/>
+                    <Label Text="Cocteles Favoritos" TextColor="{StaticResource PrimaryDark}" FontSize="Large"/>
+                </StackLayout>
+                <ListView ItemsSource="{Binding Drinks}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ImageCell 
+                                ImageSource="{Binding Thumbnail}"
+                                Text="{Binding Name}"
+                                Detail="{Binding Category}">
+                            </ImageCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <StackLayout Orientation="Horizontal" Spacing="10">
+                    <iconize:IconLabel FontSize="Large" Text="fa-star" TextColor="{StaticResource PrimaryDark}"/>
+                    <Label Text="Ingredientes Favoritos" TextColor="{StaticResource PrimaryDark}" FontSize="Large"/>
+                </StackLayout>
+                <ListView ItemsSource="{Binding Ingredients}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ImageCell 
+                                ImageSource="{Binding Thumbnail}"
+                                Text="{Binding Name}">
+                            </ImageCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

@@ -36,6 +36,7 @@ namespace CloverClubApp.Views
 
 	        App.Current.Properties["tokenDate"] = now;
 	        App.Current.Properties["token"] = token;
+	        App.Current.Properties["loggedIn"] = true;
 
 	        await Navigation.PopAsync();
 	    }

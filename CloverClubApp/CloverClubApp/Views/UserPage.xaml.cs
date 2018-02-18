@@ -27,12 +27,22 @@ namespace CloverClubApp.Views
 	        base.OnAppearing();
 
 	        if (loggedIn)
-	            return;
-
-            if(!viewModel.LoginStatus)
+	        {
+	            LoginLayout.IsVisible = true;
+	            UserLayout.IsVisible = false;
                 return;
+	        }
+
+	        if(!viewModel.LoginStatus)
+	        {
+	            LoginLayout.IsVisible = true;
+	            UserLayout.IsVisible = false;
+                return;
+	        }
 
             viewModel.LoadItemsCommand.Execute(null);
+	        LoginLayout.IsVisible = false;
+	        UserLayout.IsVisible = true;
 	    }
 
 	    private async void ButtonLogin_OnClicked(object sender, EventArgs e)

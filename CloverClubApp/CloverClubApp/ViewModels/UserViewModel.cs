@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CloverClubApp.Models;
@@ -32,13 +33,19 @@ namespace CloverClubApp.ViewModels
         }
 
         public Command LoadItemsCommand { get; }
+        public ObservableCollection<Drink> Drinks { get; }
+        public ObservableCollection<SimpleIngredient> Ingredients { get; }
 
         public string User { get; set; }
+
+
 
         public UserViewModel()
         {
             Title = "Area Personal";
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+            Drinks = new ObservableCollection<Drink>();
+            Ingredients = new ObservableCollection<SimpleIngredient>();
         }
 
         private async Task ExecuteLoadItemsCommand()
@@ -55,7 +62,17 @@ namespace CloverClubApp.ViewModels
                 var cocteles = await CoctelService.RetrieveDrinks();
                 var ingredientes = await CoctelService.RetrieveIngredients();
 
+                Drinks.Clear();
+                foreach (var coctelFav in user.CoctelesFavList)
+                {
+                    Drinks.Add(cocteles.FirstOrDefault(x => Int32.Parse(x.Id).Equals(coctelFav)));
+                }
 
+                Ingredients.Clear();
+                foreach (var ingredientFav in user.IngredientesFavList)
+                {
+                    Ingredients.Add(ingredientes.FirstOrDefault(x => x.Name.Equals(ingredientFav)));
+                }
             }
             catch (Exception ex)
             {

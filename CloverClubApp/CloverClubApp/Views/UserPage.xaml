@@ -13,6 +13,7 @@
                        HorizontalOptions="Center"
                        FontSize="Medium"/>
             </StackLayout>
+            <Label Text="{Binding User}"></Label>
             <StackLayout VerticalOptions="CenterAndExpand" Padding="10">
                 <Button Text="Login" BackgroundColor="{StaticResource Primary}" TextColor="White" Clicked="ButtonLogin_OnClicked"/>
                 <Button Text="Registrarse" BackgroundColor="{StaticResource Primary}" TextColor="White" Clicked="ButtonRegister_OnClicked"/>

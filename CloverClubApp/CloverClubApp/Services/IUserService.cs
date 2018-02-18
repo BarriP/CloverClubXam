@@ -9,5 +9,7 @@ namespace CloverClubApp.Services
     interface IUserService
     {
         User RegistrarUsuario(RegisterData user);
+        string Login(LoginData loginData);
+        Task<User> GetUser(string token);
     }
 }

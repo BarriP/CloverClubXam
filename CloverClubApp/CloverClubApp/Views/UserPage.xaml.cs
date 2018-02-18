@@ -13,6 +13,7 @@ namespace CloverClubApp.Views
 	public partial class UserPage : ContentPage
 	{
 	    UserViewModel viewModel;
+	    private bool loggedIn;
 
 	    public UserPage()
 	    {
@@ -24,6 +25,14 @@ namespace CloverClubApp.Views
 	    protected override void OnAppearing()
 	    {
 	        base.OnAppearing();
+
+	        if (loggedIn)
+	            return;
+
+            if(!viewModel.LoginStatus)
+                return;
+
+            viewModel.LoadItemsCommand.Execute(null);
 	    }
 
 	    private async void ButtonLogin_OnClicked(object sender, EventArgs e)

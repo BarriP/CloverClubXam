@@ -21,5 +21,20 @@ namespace CloverClubApp.Services
         {
             return client.PostJson<User>($"{TOKENS_URL}/register", regData).Result;
         }
+
+        public string Login(LoginData loginData)
+        {
+            return client.PostJson<Token>($"{TOKENS_URL}/login", loginData).Result.token;
+        }
+
+        public async Task<User> GetUser(string token)
+        {
+            return await client.GetSecure<User>(USER_URL, token);
+        }
+    }
+
+    public class Token
+    {
+        public string token { get; set; }
     }
 }

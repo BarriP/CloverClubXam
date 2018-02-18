@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CloverClubApp.Models;
+using CloverClubApp.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -26,10 +27,17 @@ namespace CloverClubApp.Views
 	        var loginData = new LoginData
 	        {
 	            Email = EmailEntry.Text,
-	            Password = PasswordEntry.Text
+	            Password = PasswordEntry.Text,
 	        };
-	        MessagingCenter.Send(this, "login", loginData);
-	        await Navigation.PopModalAsync();
-        }
-	}
+
+            DateTime now = DateTime.Now.AddHours(4);
+	        UserService client = new UserService();
+	        string token = client.Login(loginData);
+
+	        App.Current.Properties["tokenDate"] = now;
+	        App.Current.Properties["token"] = token;
+
+	        await Navigation.PopAsync();
+	    }
+    }
 }

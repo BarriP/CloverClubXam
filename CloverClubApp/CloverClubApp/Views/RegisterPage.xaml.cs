@@ -22,7 +22,7 @@ namespace CloverClubApp.Views
 	        Title = "Registrate";
 	    }
 
-	    private void Button_OnClicked(object sender, EventArgs e)
+	    private async void Button_OnClicked(object sender, EventArgs e)
 	    {
 	        var registerData = new RegisterData
 	        {
@@ -33,6 +33,7 @@ namespace CloverClubApp.Views
 
             UserService client = new UserService();
 	        var user = client.RegistrarUsuario(registerData);
+	        await Navigation.PopAsync();
 	    }
 	}
 }

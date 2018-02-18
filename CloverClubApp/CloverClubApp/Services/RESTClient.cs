@@ -75,9 +75,6 @@ namespace CloverClubApp.Services
 
             HttpClient newClient = new HttpClient();
 
-            //var response = newClient.PostAsync(new Uri("http://10.0.2.2:9090/api/Tokens/login"), new StringContent("fasdfsdaf")).Result;
-            //var response = await client.PostAsync(new Uri(uri), httpContent);
-
             var response = newClient.PostAsync(new Uri(uri), httpContent).Result;
             if (response.IsSuccessStatusCode)
             {

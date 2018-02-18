@@ -10,7 +10,7 @@ namespace CloverClubApp.Models
         public string Name { get; set; }
         public string Pass { get; set; }
         public string Email { get; set; }
-        public IEnumerable<int> CoctelesFavList { get; set; }
-        public IEnumerable<string> IngredientesFavList { get; set; }
+        public List<int> CoctelesFavList { get; set; }
+        public List<string> IngredientesFavList { get; set; }
     }
 }

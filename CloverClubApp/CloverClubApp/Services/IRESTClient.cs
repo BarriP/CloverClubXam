@@ -8,5 +8,8 @@ namespace CloverClubApp.Services
     interface IRESTClient
     {
         Task<T> Get<T>(string uri);
+        Task<T> GetSecure<T>(string uri, string token);
+        Task<T> PostSecureJson<T>(string uri, string token, object body);
+        Task<T> PostJson<T>(string uri, object body);
     }
 }

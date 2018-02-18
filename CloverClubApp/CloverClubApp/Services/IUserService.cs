@@ -8,5 +8,6 @@ namespace CloverClubApp.Services
 {
     interface IUserService
     {
+        User RegistrarUsuario(RegisterData user);
     }
 }

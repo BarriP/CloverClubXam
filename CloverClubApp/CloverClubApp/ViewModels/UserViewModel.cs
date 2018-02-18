@@ -28,6 +28,21 @@ namespace CloverClubApp.ViewModels
                     Debug.WriteLine(e);
                 }
             });
+
+            MessagingCenter.Subscribe<RegisterPage, RegisterData>(this, "register", async (obj, item) =>
+            {
+                try
+                {
+                    var registered = userService.RegistrarUsuario(item);
+
+                    var a = "";
+
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e);
+                }
+            });
         }
     }
 }

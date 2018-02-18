@@ -17,10 +17,10 @@
             </x:Arguments>
         </iconize:IconNavigationPage>
 
-        <NavigationPage Title="Area Personal">
+        <iconize:IconNavigationPage Title="Area Personal">
             <x:Arguments>
                 <views:UserPage />
             </x:Arguments>
-        </NavigationPage>
+        </iconize:IconNavigationPage>
     </TabbedPage.Children>
 </TabbedPage>

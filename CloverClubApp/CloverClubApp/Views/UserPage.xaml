@@ -30,7 +30,13 @@
                     <iconize:IconLabel FontSize="Large" Text="fa-star" TextColor="{StaticResource PrimaryDark}"/>
                     <Label Text="Cocteles Favoritos" TextColor="{StaticResource PrimaryDark}" FontSize="Large"/>
                 </StackLayout>
-                <ListView ItemsSource="{Binding Drinks}">
+                <ListView x:Name="DrinkList"
+                          ItemsSource="{Binding Drinks}"
+                          RefreshCommand="{Binding LoadItemsCommand}"
+                          IsPullToRefreshEnabled="true"
+                          IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                          CachingStrategy="RecycleElement"
+                          ItemSelected="OnDrinkSelected">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ImageCell 
@@ -46,7 +52,13 @@
                     <iconize:IconLabel FontSize="Large" Text="fa-star" TextColor="{StaticResource PrimaryDark}"/>
                     <Label Text="Ingredientes Favoritos" TextColor="{StaticResource PrimaryDark}" FontSize="Large"/>
                 </StackLayout>
-                <ListView ItemsSource="{Binding Ingredients}">
+                <ListView x:Name="IngredientList"
+                          ItemsSource="{Binding Ingredients}"
+                          RefreshCommand="{Binding LoadItemsCommand}"
+                          IsPullToRefreshEnabled="true"
+                          IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                          CachingStrategy="RecycleElement"
+                          ItemSelected="OnIngredientSelected">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ImageCell 

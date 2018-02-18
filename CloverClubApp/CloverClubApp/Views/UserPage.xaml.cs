@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CloverClubApp.Models;
 using CloverClubApp.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -57,5 +58,28 @@ namespace CloverClubApp.Views
 	        UserLayout.IsVisible = false;
 	        Logout.IsEnabled = false;
         }
-	}
+
+	    private async void OnDrinkSelected(object sender, SelectedItemChangedEventArgs args)
+	    {
+	        var item = args.SelectedItem as Drink;
+	        if (item == null)
+	            return;
+
+	        await Navigation.PushAsync(new CoctelDetailPage(new CoctelDetailViewModel(item)));
+
+	        // Manually deselect item.
+	        this.DrinkList.SelectedItem = null;
+	    }
+
+	    private async void OnIngredientSelected(object sender, SelectedItemChangedEventArgs args)
+	    {
+	        if (!(args.SelectedItem is SimpleIngredient item))
+	            return;
+
+	        await Navigation.PushAsync(new IngredientDetailPage(new IngredientDetailViewModel(item)));
+
+	        // Manually deselect item.
+	        this.IngredientList.SelectedItem = null;
+        }
+    }
 }

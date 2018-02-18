@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
+using CloverClubApp.DeviceSpecific;
 using CloverClubApp.Models;
 using CloverClubApp.Views;
 using Xamarin.Forms;
@@ -28,15 +29,6 @@ namespace CloverClubApp.ViewModels
             Title = "Listado de Cocteles";
             Items = new ObservableCollection<Drink>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-
-            /*
-            MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
-            {
-                var _item = item as Item;
-                Items.Add(_item);
-                await DataStore.AddItemAsync(_item);
-            });
-            */
         }
 
         async Task ExecuteLoadItemsCommand()

@@ -19,6 +19,7 @@ namespace CloverClubApp.Models
         [JsonProperty("thumbnailURL")]
         public string ThumbnailURL { get; set; }
         public IEnumerable<DrinkIngredient> Ingredients { get; set; }
+        //No, no es el "iva" del producto, se refiere al registro en la International Bartenders Association
         public string Iba { get; set; }
 
         /* Calculated */

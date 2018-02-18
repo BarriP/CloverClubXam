@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CloverClubApp.DeviceSpecific;
 using CloverClubApp.Models;
 using CloverClubApp.ViewModels;
 using Xamarin.Forms;
@@ -92,6 +93,7 @@ namespace CloverClubApp.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+                DependencyService.Get<IMessage>().ShortAlert("No se han podido recuperar los datos del coctel. Compruebe la conexion de red");
             }
             finally
             {

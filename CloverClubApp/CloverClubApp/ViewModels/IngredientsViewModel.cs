@@ -48,6 +48,7 @@ namespace CloverClubApp.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+
             }
             finally
             {

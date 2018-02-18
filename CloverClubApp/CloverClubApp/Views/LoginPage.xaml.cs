@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CloverClubApp.DeviceSpecific;
 using CloverClubApp.Models;
 using CloverClubApp.Services;
 using Xamarin.Forms;
@@ -27,8 +28,14 @@ namespace CloverClubApp.Views
 	        var loginData = new LoginData
 	        {
 	            Email = EmailEntry.Text,
-	            Password = PasswordEntry.Text,
+	            Password = PasswordEntry.Text
 	        };
+
+	        if (loginData.Email.Length < 3 || loginData.Password.Length < 3)
+	        {
+	            DependencyService.Get<IMessage>().ShortAlert("Los campos no pueden tener menos de 3 caracteres");
+	            return;
+	        }
 
             DateTime now = DateTime.Now.AddHours(4);
 	        UserService client = new UserService();

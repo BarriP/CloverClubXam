@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CloverClubApp.DeviceSpecific;
 using CloverClubApp.Models;
 using CloverClubApp.Services;
 using CloverClubApp.Views;
@@ -46,25 +47,58 @@ namespace CloverClubApp.ViewModels
             MessagingCenter.Subscribe<CoctelDetailPage, int>(this, "RemoveCoctelFav", (obj, item) =>
             {
                 App.Current.Properties.TryGetValue("token", out object tokenObject);
-                userService.BorrarCoctelFav(item, tokenObject.ToString());
+                try
+                {
+                    userService.BorrarCoctelFav(item, tokenObject.ToString());
+                    DependencyService.Get<IMessage>().ShortAlert("Coctel borrado de favoritos");
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex);
+                    DependencyService.Get<IMessage>().ShortAlert("No se ha podido borrar de favoritos, intentelo de nuevo");
+                }
             });
 
             MessagingCenter.Subscribe<CoctelDetailPage, int>(this, "AddCoctelFav", (obj, item) =>
             {
                 App.Current.Properties.TryGetValue("token", out object tokenObject);
-                userService.AñadirCoctelFav(item, tokenObject.ToString());
+                try { 
+                    userService.AñadirCoctelFav(item, tokenObject.ToString());
+                    DependencyService.Get<IMessage>().ShortAlert("Coctel añadido a favoritos");
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex);
+                    DependencyService.Get<IMessage>().ShortAlert("No se han podido añadir a favoritos, intentelo de nuevo");
+                }
             });
 
             MessagingCenter.Subscribe<IngredientDetailPage, string>(this, "RemoveIngredienteFav", (obj, item) =>
             {
                 App.Current.Properties.TryGetValue("token", out object tokenObject);
-                userService.BorrarIngredienteFav(item, tokenObject.ToString());
+                try { 
+                    userService.BorrarIngredienteFav(item, tokenObject.ToString());
+                    DependencyService.Get<IMessage>().ShortAlert("Ingrediente borrado de favoritos");
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex);
+                    DependencyService.Get<IMessage>().ShortAlert("No se ha podido borrar de favoritos, intentelo de nuevo");
+                }
             });
 
             MessagingCenter.Subscribe<IngredientDetailPage, string>(this, "AddIngredienteFav", (obj, item) =>
             {
                 App.Current.Properties.TryGetValue("token", out object tokenObject);
-                userService.AñadirIngredienteFav(item, tokenObject.ToString());
+                try { 
+                    userService.AñadirIngredienteFav(item, tokenObject.ToString());
+                    DependencyService.Get<IMessage>().ShortAlert("Ingrediente añadido a favoritos");
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex);
+                    DependencyService.Get<IMessage>().ShortAlert("No se ha podido borrar de favoritos, intentelo de nuevo");
+                }
             });
         }
 
@@ -102,6 +136,7 @@ namespace CloverClubApp.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+                DependencyService.Get<IMessage>().ShortAlert("No se han podido recuperar los datos de usuario. Compruebe la conexion de red");
             }
             finally
             {

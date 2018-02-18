@@ -15,6 +15,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)DeviceSpecific\IMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Drink.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Ingredient.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\LoginData.cs" />
@@ -28,7 +29,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\IUserService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\RESTClient.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\UserService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AboutViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\CoctelDetailViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\CoctelsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\IngredientDetailViewModel.cs" />

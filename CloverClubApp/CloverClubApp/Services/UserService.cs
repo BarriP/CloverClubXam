@@ -34,26 +34,34 @@ namespace CloverClubApp.Services
 
         public bool AñadirCoctelFav(int id, string token)
         {
-            var response = client.PostSecureJson<dynamic>($"{USER_URL}/{COCTELES}", token, id).Result;
+            var response = client.PostSecureJson<object>($"{USER_URL}/{COCTELES}", token, id).Result;
             return response == null;
         }
 
         public bool AñadirIngredienteFav(string ing, string token)
         {
-            var response = client.PostSecureJson<dynamic>($"{USER_URL}/{INGREDIENTES}", token, ing).Result;
+            var response = client.PostSecureJson<object>($"{USER_URL}/{INGREDIENTES}", token, ing).Result;
             return response == null;
         }
 
         public bool BorrarCoctelFav(int id, string token)
         {
-            var response = client.DeleteSecure<dynamic>($"{USER_URL}/{COCTELES}/{id}", token).Result;
+            var response = client.DeleteSecure<object>($"{USER_URL}/{COCTELES}/{id}", token).Result;
             return response == null;
         }
 
         public bool BorrarIngredienteFav(string ing, string token)
         {
-            var response = client.DeleteSecure<dynamic>($"{USER_URL}/{INGREDIENTES}/{ing}", token).Result;
+            var response = client.DeleteSecure<object>($"{USER_URL}/{INGREDIENTES}/{ing}", token).Result;
             return response == null;
+        }
+
+        public bool Disconnect()
+        {
+            App.Current.Properties["tokenDate"] = null;
+            App.Current.Properties["token"] = null;
+            App.Current.Properties["loggedIn"] = false;
+            return true;
         }
     }
 

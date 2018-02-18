@@ -6,7 +6,8 @@
              xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
              Title="{Binding Title}">
     <ContentPage.ToolbarItems>
-        <iconize:IconToolbarItem Text="fa-star" Clicked="AddFav_OnClicked"></iconize:IconToolbarItem>
+        <iconize:IconToolbarItem x:Name="AddFav" IconColor="DarkOrange" Icon="fa-star-o" IsVisible="False"/>
+        <iconize:IconToolbarItem x:Name="RemoveFav" IconColor="DarkOrange" Icon="fa-trash" IsVisible="False"/>
     </ContentPage.ToolbarItems>
     <ScrollView>
         <StackLayout Spacing="20" Padding="15">
@@ -65,8 +66,8 @@
             </ListView>
             
             <StackLayout Orientation="Vertical">
-                <Label HorizontalTextAlignment="Center" Text="Precio Estimado"></Label>
-                <Label HorizontalTextAlignment="Center" FontAttributes="Bold" Text="{Binding PrecioFinal}"></Label>
+                <Label HorizontalTextAlignment="Center" Text="Precio Estimado"/>
+                <Label HorizontalTextAlignment="Center" FontAttributes="Bold" Text="{Binding PrecioFinal}"/>
             </StackLayout>
 
         </StackLayout>

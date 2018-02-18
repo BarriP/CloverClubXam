@@ -23,6 +23,9 @@ namespace CloverClubApp.Views
 	        InitializeComponent();
 
 	        BindingContext = this.viewModel = viewModel;
+
+	        AddFav.Command = new Command(AddFav_OnClicked);
+	        RemoveFav.Command = new Command(RemoveFav_OnClicked);
         }
 
 	    public IngredientDetailPage()
@@ -39,10 +42,48 @@ namespace CloverClubApp.Views
 	    {
 	        base.OnAppearing();
 
-	        if (initialized) return;
+	        App.Current.Properties.TryGetValue("loggedIn", out object logged);
+	        if (logged != null && (bool)logged)
+	        {
+	            App.Current.Properties.TryGetValue("ingredientesFav", out object ingredientes);
+	            if (ingredientes is IEnumerable<string> list)
+	            {
+	                this.AddFav.IsVisible = !list.Contains(viewModel.SimpleIngredient.Name);
+	                this.RemoveFav.IsVisible = !this.AddFav.IsVisible;
+	            }
+	        }
+
+            if (initialized) return;
 
 	        viewModel.LoadIngredientCommand.Execute(null);
 	        initialized = true;
+	    }
+
+	    private async void AddFav_OnClicked()
+	    {
+	        App.Current.Properties.TryGetValue("loggedIn", out object logged);
+	        if ((bool)logged)
+	        {
+	            MessagingCenter.Send(this, "AddIngredienteFav", viewModel.SimpleIngredient.Name);
+	            App.Current.Properties.TryGetValue("ingrdientesFav", out object ingredientes);
+	            var list = ingredientes as List<string>;
+	            list.Add(viewModel.SimpleIngredient.Name);
+	            await this.Navigation.PopAsync();
+	        }
+
+	    }
+
+	    private async void RemoveFav_OnClicked()
+	    {
+	        App.Current.Properties.TryGetValue("loggedIn", out object logged);
+	        if ((bool)logged)
+	        {
+	            MessagingCenter.Send(this, "RemoveIngredienteFav", viewModel.SimpleIngredient.Name);
+	            App.Current.Properties.TryGetValue("ingrdientesFav", out object ingredientes);
+	            var list = ingredientes as List<string>;
+	            list.Add(viewModel.SimpleIngredient.Name);
+                await this.Navigation.PopAsync();
+	        }
 	    }
     }
 }

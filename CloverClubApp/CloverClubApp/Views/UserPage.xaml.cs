@@ -13,7 +13,6 @@ namespace CloverClubApp.Views
 	public partial class UserPage : ContentPage
 	{
 	    UserViewModel viewModel;
-	    private bool loggedIn;
 
 	    public UserPage()
 	    {
@@ -26,24 +25,19 @@ namespace CloverClubApp.Views
 	    {
 	        base.OnAppearing();
 
-	        if (loggedIn)
-	        {
-	            LoginLayout.IsVisible = true;
-	            UserLayout.IsVisible = false;
-                return;
-	        }
-
 	        if(!viewModel.LoginStatus)
 	        {
 	            LoginLayout.IsVisible = true;
 	            UserLayout.IsVisible = false;
+	            Logout.IsEnabled = false;
                 return;
 	        }
 
             viewModel.LoadItemsCommand.Execute(null);
 	        LoginLayout.IsVisible = false;
 	        UserLayout.IsVisible = true;
-	    }
+	        Logout.IsEnabled = true;
+        }
 
 	    private async void ButtonLogin_OnClicked(object sender, EventArgs e)
 	    {
@@ -53,6 +47,15 @@ namespace CloverClubApp.Views
 	    private async void ButtonRegister_OnClicked(object sender, EventArgs e)
 	    {
 	        await Navigation.PushAsync(new RegisterPage());
+        }
+
+	    private void Logout_OnClicked(object sender, EventArgs e)
+	    {
+	        viewModel.userService.Disconnect();
+
+	        LoginLayout.IsVisible = true;
+	        UserLayout.IsVisible = false;
+	        Logout.IsEnabled = false;
         }
 	}
 }

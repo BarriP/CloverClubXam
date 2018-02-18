@@ -23,6 +23,9 @@ namespace CloverClubApp.Views
 			InitializeComponent ();
 
 		    BindingContext = this.viewModel = viewModel;
+
+            AddFav.Command = new Command(AddFav_OnClicked);
+            RemoveFav.Command = new Command(RemoveFav_OnClicked);
         }
 
 	    public CoctelDetailPage()
@@ -39,7 +42,19 @@ namespace CloverClubApp.Views
 	    {
 	        base.OnAppearing();
 
-	        if (initialized) return;
+	        App.Current.Properties.TryGetValue("loggedIn", out object logged);
+	        if (logged != null && (bool) logged)
+	        {
+	            App.Current.Properties.TryGetValue("coctelesFav", out object cocteles);
+	            if (cocteles is IEnumerable<int> list)
+	            {
+	                int id = int.Parse(viewModel.Coctel.Id);
+	                this.AddFav.IsVisible = !list.Contains(id);
+	                this.RemoveFav.IsVisible = !this.AddFav.IsVisible;
+	            }
+	        }
+
+            if (initialized) return;
 
 	        viewModel.LoadItemsCommand.Execute(null);
 	        initialized = true;
@@ -50,10 +65,31 @@ namespace CloverClubApp.Views
 	        viewModel.LoadActiveCollectionCommand.Execute(Picker.Items[Picker.SelectedIndex]);
 	    }
 
-	    private void AddFav_OnClicked(object sender, EventArgs e)
+	    private async void AddFav_OnClicked()
 	    {
 	        App.Current.Properties.TryGetValue("loggedIn", out object logged);
-	        MessagingCenter.Send(this, "AddCoctelFav", Int32.Parse(viewModel.Coctel.Id));
-        }
+	        if ((bool) logged)
+	        {
+	            MessagingCenter.Send(this, "AddCoctelFav", Int32.Parse(viewModel.Coctel.Id));
+	            App.Current.Properties.TryGetValue("coctelesFav", out object cocteles);
+	            var list = cocteles as List<int>;
+                list.Add(Int32.Parse(viewModel.Coctel.Id));
+                await this.Navigation.PopAsync();
+	        }
+
+	    }
+
+	    private async void RemoveFav_OnClicked()
+	    {
+	        App.Current.Properties.TryGetValue("loggedIn", out object logged);
+	        if ((bool) logged)
+	        {
+	            MessagingCenter.Send(this, "RemoveCoctelFav", Int32.Parse(viewModel.Coctel.Id));
+	            App.Current.Properties.TryGetValue("coctelesFav", out object cocteles);
+	            var list = cocteles as List<int>;
+	            list.Remove(Int32.Parse(viewModel.Coctel.Id));
+                await this.Navigation.PopAsync();
+            }
+	    }
 	}
 }

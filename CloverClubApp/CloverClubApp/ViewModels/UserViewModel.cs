@@ -36,8 +36,6 @@ namespace CloverClubApp.ViewModels
         public ObservableCollection<Drink> Drinks { get; }
         public ObservableCollection<SimpleIngredient> Ingredients { get; }
 
-        public string User { get; set; }
-
         public UserViewModel()
         {
             Title = "Area Personal";
@@ -45,10 +43,28 @@ namespace CloverClubApp.ViewModels
             Drinks = new ObservableCollection<Drink>();
             Ingredients = new ObservableCollection<SimpleIngredient>();
 
+            MessagingCenter.Subscribe<CoctelDetailPage, int>(this, "RemoveCoctelFav", (obj, item) =>
+            {
+                App.Current.Properties.TryGetValue("token", out object tokenObject);
+                userService.BorrarCoctelFav(item, tokenObject.ToString());
+            });
+
             MessagingCenter.Subscribe<CoctelDetailPage, int>(this, "AddCoctelFav", (obj, item) =>
             {
                 App.Current.Properties.TryGetValue("token", out object tokenObject);
                 userService.AñadirCoctelFav(item, tokenObject.ToString());
+            });
+
+            MessagingCenter.Subscribe<IngredientDetailPage, string>(this, "RemoveIngredienteFav", (obj, item) =>
+            {
+                App.Current.Properties.TryGetValue("token", out object tokenObject);
+                userService.BorrarIngredienteFav(item, tokenObject.ToString());
+            });
+
+            MessagingCenter.Subscribe<IngredientDetailPage, string>(this, "AddIngredienteFav", (obj, item) =>
+            {
+                App.Current.Properties.TryGetValue("token", out object tokenObject);
+                userService.AñadirIngredienteFav(item, tokenObject.ToString());
             });
         }
 
@@ -63,6 +79,11 @@ namespace CloverClubApp.ViewModels
                 App.Current.Properties.TryGetValue("token", out object tokenObject);
 
                 var user = await userService.GetUser(tokenObject.ToString());
+
+                App.Current.Properties.Add("coctelesFav", user.CoctelesFavList);
+                App.Current.Properties.Add("ingredientesFav", user.IngredientesFavList);
+
+
                 var cocteles = await CoctelService.RetrieveDrinks();
                 var ingredientes = await CoctelService.RetrieveIngredients();
 

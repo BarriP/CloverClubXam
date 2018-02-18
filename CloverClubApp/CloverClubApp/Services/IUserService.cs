@@ -15,5 +15,6 @@ namespace CloverClubApp.Services
         bool AñadirIngredienteFav(string ing, string token);
         bool BorrarCoctelFav(int id, string token);
         bool BorrarIngredienteFav(string ing, string token);
+        bool Disconnect();
     }
 }

@@ -65,7 +65,7 @@ namespace CloverClubApp.Views
 	        if ((bool)logged)
 	        {
 	            MessagingCenter.Send(this, "AddIngredienteFav", viewModel.SimpleIngredient.Name);
-	            App.Current.Properties.TryGetValue("ingrdientesFav", out object ingredientes);
+	            App.Current.Properties.TryGetValue("ingredientesFav", out object ingredientes);
 	            var list = ingredientes as List<string> ?? new List<string>();
 	            list.Add(viewModel.SimpleIngredient.Name);
 	            await this.Navigation.PopAsync();
@@ -79,7 +79,7 @@ namespace CloverClubApp.Views
 	        if ((bool)logged)
 	        {
 	            MessagingCenter.Send(this, "RemoveIngredienteFav", viewModel.SimpleIngredient.Name);
-	            App.Current.Properties.TryGetValue("ingrdientesFav", out object ingredientes);
+	            App.Current.Properties.TryGetValue("ingredientesFav", out object ingredientes);
 	            var list = ingredientes as List<string> ?? new List<string>();
                 list.Add(viewModel.SimpleIngredient.Name);
                 await this.Navigation.PopAsync();

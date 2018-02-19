@@ -40,7 +40,9 @@ namespace CloverClubApp.ViewModels
         public UserViewModel()
         {
             Title = "Area Personal";
+
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+
             Drinks = new ObservableCollection<Drink>();
             Ingredients = new ObservableCollection<SimpleIngredient>();
 
@@ -114,9 +116,8 @@ namespace CloverClubApp.ViewModels
 
                 var user = await userService.GetUser(tokenObject.ToString());
 
-                App.Current.Properties.Add("coctelesFav", user.CoctelesFavList);
-                App.Current.Properties.Add("ingredientesFav", user.IngredientesFavList);
-
+                App.Current.Properties["coctelesFav"] = user.CoctelesFavList;
+                App.Current.Properties["ingredientesFav"] = user.IngredientesFavList;
 
                 var cocteles = await CoctelService.RetrieveDrinks();
                 var ingredientes = await CoctelService.RetrieveIngredients();
@@ -124,7 +125,9 @@ namespace CloverClubApp.ViewModels
                 Drinks.Clear();
                 foreach (var coctelFav in user.CoctelesFavList)
                 {
-                    Drinks.Add(cocteles.FirstOrDefault(x => Int32.Parse(x.Id).Equals(coctelFav)));
+                    var d = cocteles.FirstOrDefault(x => int.Parse(x.Id) == coctelFav);
+                    if(d != null)
+                        Drinks.Add(d);
                 }
 
                 Ingredients.Clear();

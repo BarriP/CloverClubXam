@@ -20,6 +20,8 @@ namespace CloverClubApp.Views
 	        InitializeComponent();
 
 	        BindingContext = viewModel = new UserViewModel();
+
+            Logout.Command = new Command(LogoutAction);
 	    }
 
 	    protected override void OnAppearing()
@@ -30,14 +32,14 @@ namespace CloverClubApp.Views
 	        {
 	            LoginLayout.IsVisible = true;
 	            UserLayout.IsVisible = false;
-	            Logout.IsEnabled = false;
+	            Logout.IsVisible = false;
                 return;
 	        }
 
             viewModel.LoadItemsCommand.Execute(null);
 	        LoginLayout.IsVisible = false;
 	        UserLayout.IsVisible = true;
-	        Logout.IsEnabled = true;
+	        Logout.IsVisible = true;
         }
 
 	    private async void ButtonLogin_OnClicked(object sender, EventArgs e)
@@ -48,15 +50,6 @@ namespace CloverClubApp.Views
 	    private async void ButtonRegister_OnClicked(object sender, EventArgs e)
 	    {
 	        await Navigation.PushAsync(new RegisterPage());
-        }
-
-	    private void Logout_OnClicked(object sender, EventArgs e)
-	    {
-	        viewModel.userService.Disconnect();
-
-	        LoginLayout.IsVisible = true;
-	        UserLayout.IsVisible = false;
-	        Logout.IsEnabled = false;
         }
 
 	    private async void OnDrinkSelected(object sender, SelectedItemChangedEventArgs args)
@@ -81,5 +74,14 @@ namespace CloverClubApp.Views
 	        // Manually deselect item.
 	        this.IngredientList.SelectedItem = null;
         }
+
+	    private void LogoutAction()
+	    {
+	        viewModel.userService.Disconnect();
+
+	        LoginLayout.IsVisible = true;
+	        UserLayout.IsVisible = false;
+	        Logout.IsVisible = false;
+	    }
     }
 }

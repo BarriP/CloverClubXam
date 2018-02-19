@@ -72,7 +72,7 @@ namespace CloverClubApp.Views
 	        {
 	            MessagingCenter.Send(this, "AddCoctelFav", Int32.Parse(viewModel.Coctel.Id));
 	            App.Current.Properties.TryGetValue("coctelesFav", out object cocteles);
-	            var list = cocteles as List<int>;
+	            var list = cocteles as List<int> ?? new List<int>();
                 list.Add(Int32.Parse(viewModel.Coctel.Id));
                 await this.Navigation.PopAsync();
 	        }
@@ -86,7 +86,7 @@ namespace CloverClubApp.Views
 	        {
 	            MessagingCenter.Send(this, "RemoveCoctelFav", Int32.Parse(viewModel.Coctel.Id));
 	            App.Current.Properties.TryGetValue("coctelesFav", out object cocteles);
-	            var list = cocteles as List<int>;
+	            var list = cocteles as List<int> ?? new List<int>();
 	            list.Remove(Int32.Parse(viewModel.Coctel.Id));
                 await this.Navigation.PopAsync();
             }
